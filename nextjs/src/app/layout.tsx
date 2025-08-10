@@ -1,3 +1,4 @@
+import { GoogleAnalytics } from '@next/third-parties/google';
 import { LoadingProvider, Link } from '@/components/navigation';
 import { Loader } from '@/components/ui';
 import style from './layout.module.css';
@@ -10,6 +11,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <html lang="en">
             <head>
                 <link rel="icon" href="/favicon.png" />
+                <GoogleAnalytics gaId="G-CKCYSP1KVK" />
             </head>
             <body data-loading="true">
                 <LoadingProvider minDelay={500}>

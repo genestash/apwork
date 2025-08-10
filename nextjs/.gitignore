@@ -1,4 +1,6 @@
 node_modules
 archive
 .next
+
 public/applications/remove-background
+docker-compose.yml
