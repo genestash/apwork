@@ -1,12 +1,10 @@
-name: Manual Deploy to EC2
+name: Deploy to EC2
 
-on:
-  workflow_dispatch:
+on: workflow_dispatch
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -25,4 +23,5 @@ jobs:
             fi
             cd /home/ec2-user/apwork
             docker compose down
-            docker compose up -d --build
+            docker compose up --build -d
+            docker system prune -f
