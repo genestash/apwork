@@ -1,0 +1,40 @@
+.wrap {
+    transform: scale(0.8);
+}
+
+.circle {
+    width: 21px;
+    height: 21px;
+    box-sizing: border-box;
+    border: 3px solid var(--color, #000);
+    border-right-color: transparent;
+    border-radius: 50%;
+    animation: loading 0.2s linear infinite;
+}
+
+@keyframes loading {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.wrap.small {
+    transform: scale(0.67);
+}
+
+.wrap.small .circle {
+    border-width: 2px;
+}
+
+.wrap.logo {
+    transform: scale(0.62);
+}
+
+.wrap.logo .circle {
+    width: 25px;
+    height: 25px;
+}

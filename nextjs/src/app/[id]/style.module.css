@@ -1,0 +1,37 @@
+.wrap:has(.about) {
+    width: 100%;
+    padding: var(--outer-space);
+    padding-bottom: 0;
+    box-sizing: border-box;
+    border-top: 1px solid var(--border);
+    margin: 0 auto;
+}
+
+.about {
+    width: 100%;
+    max-width: var(--max-width);
+    box-sizing: border-box;
+    border: 1px solid var(--border);
+    border-radius: var(--border-radius);
+    margin: 0 auto var(--outer-space) auto;
+}
+
+.top {
+    width: 100%;
+    height: var(--space-height);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+}
+
+.name {
+    font-size: 16px;
+    line-height: 1.62;
+    padding: 0 20px;
+}
+
+.description {
+    width: 100%;
+    box-sizing: border-box;
+    padding: calc(34px - 6px) 34px calc(34px - 8px) 34px;
+}

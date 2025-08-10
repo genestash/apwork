@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://apwork.co/sitemap.xml

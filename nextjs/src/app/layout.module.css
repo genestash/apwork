@@ -1,0 +1,146 @@
+/* Loading */
+
+.main,
+.wrap:has(.bottom) {
+    transition: opacity 0.2s;
+}
+
+body[data-loading='true'] .main,
+body[data-loading='true'] .wrap:has(.bottom) {
+    opacity: 0;
+    transition: none;
+}
+
+/* Top */
+
+.wrap:has(.top) {
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 3;
+    position: fixed;
+    padding: 0 20px;
+    box-sizing: border-box;
+    background-color: rgba(255, 255, 255, 0.65);
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(10px);
+}
+
+.top {
+    width: 100%;
+    max-width: var(--max-width);
+    height: var(--space-height);
+    margin: auto;
+    display: flex;
+    align-items: center;
+}
+
+.top:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 90%;
+    height: 2px;
+    background: #000;
+    transform-origin: left;
+    animation: loadStart 5s linear;
+}
+
+@keyframes loadStart {
+    0% {
+        transform: scaleX(0);
+    }
+    100% {
+        transform: scaleX(1);
+    }
+}
+
+body:not([data-loading='true']) .top:after {
+    opacity: 0;
+    animation: loadDone 0.2s linear;
+}
+
+@keyframes loadDone {
+    0% {
+        width: 100%;
+        opacity: 1;
+    }
+
+    100% {
+        width: 100%;
+        opacity: 0;
+    }
+}
+
+.loader {
+    top: 15px;
+    left: -5px;
+    position: absolute;
+}
+
+body:not([data-loading='true']) .loader {
+    display: none;
+}
+
+.logo {
+    color: #000;
+    font-size: var(--font-size-logo);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+body[data-loading='true'] .logo {
+    color: transparent;
+}
+
+/* Main */
+
+.main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin-top: var(--space-height);
+}
+
+/* Bottom */
+
+.wrap:has(.bottom) {
+    width: 100%;
+    padding: 0px 20px;
+    box-sizing: border-box;
+    border-top: 1px solid var(--border);
+    font-size: var(--font-size-bottom);
+}
+
+.bottom {
+    width: 100%;
+    max-width: var(--max-width);
+    height: var(--space-height);
+    margin: auto;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.bottom .menu ul {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.bottom a {
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    background: var(--sand-color);
+    border-radius: 2px;
+    padding: 1px 5px 0px 5px;
+    margin-bottom: 1px;
+}
+
+.bottom a:hover {
+    color: var(--blue);
+}

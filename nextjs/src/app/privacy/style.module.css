@@ -1,0 +1,16 @@
+.document {
+    padding-bottom: 10px;
+}
+
+.document h1 {
+    text-align: center;
+}
+
+.document .date {
+    text-align: center;
+    margin: 15px 0 calc(55px - 14px) 0;
+}
+
+.document h2 {
+    margin: calc(34px - 15px) 0 calc(20px - 15px) 0;
+}

@@ -1,0 +1,39 @@
+.top {
+    z-index: 1;
+    position: fixed;
+    width: 100%;
+    height: var(--space-height);
+    border-bottom: 1px solid var(--border);
+    background: #fff;
+}
+
+.main {
+    flex: 1;
+    width: 100%;
+    margin-top: var(--space-height);
+}
+
+.block {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    text-align: center;
+}
+
+.image {
+    aspect-ratio: 1027 / 853;
+    height: 200px;
+    margin: 55px;
+    filter: contrast(1.1);
+    background-image: url('/500.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.bottom {
+    border-top: 1px solid var(--border);
+    width: 100%;
+    height: var(--space-height);
+}

@@ -1,0 +1,17 @@
+@layer internal {
+    .wrap {
+        width: 100%;
+        padding: var(--outer-space);
+        box-sizing: border-box;
+    }
+
+    .block {
+        width: 100%;
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 34px;
+        box-sizing: border-box;
+        border: 1px solid var(--border);
+        border-radius: var(--border-radius);
+    }
+}

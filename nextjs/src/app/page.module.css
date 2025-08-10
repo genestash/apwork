@@ -1,0 +1,7 @@
+.block {
+    text-align: center;
+}
+
+.note {
+    margin: calc(20px - 6px) 0 calc(55px - 8px) 0;
+}

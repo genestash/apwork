@@ -1,0 +1,123 @@
+.item {
+    aspect-ratio: 1;
+    position: relative;
+    background: #fff;
+
+    box-shadow: var(--application-shadow);
+    border: 1px solid var(--border-dark);
+    border-radius: 8px;
+
+    user-select: none;
+    cursor: pointer;
+}
+
+.item:hover {
+    border-color: var(--blue);
+    outline: 1px solid var(--blue);
+}
+
+.item article {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    container-type: inline-size;
+}
+
+.empty {
+    aspect-ratio: 1;
+    border: 1px dashed var(--border-dark);
+    border-radius: 8px;
+}
+
+/* Icon */
+
+.wrap:has(.icon),
+.wrap:has(.converter) {
+    width: 100%;
+    height: 65cqmin;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid var(--border);
+}
+
+.icon,
+.converter {
+    width: 38cqmin;
+    aspect-ratio: 1;
+    position: relative;
+    overflow: hidden;
+    border-radius: 3px;
+}
+
+.icon {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+/* Converter icon */
+
+.file {
+    width: 55%;
+    aspect-ratio: 0.7; /* 1/sqrt(2) */
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    clip-path: polygon(0 0, calc(100% - 7cqw) 0, 100% 7cqw, 100% 100%, 0 100%);
+    border-radius: 3px;
+}
+
+.file:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 7cqw;
+    aspect-ratio: 1;
+    background-color: #fff;
+    opacity: 0.3;
+}
+
+.file.from {
+    top: 0;
+    left: 0;
+    background-color: var(--red);
+}
+
+.file.to {
+    right: 0;
+    bottom: 0;
+    background-color: var(--blue);
+}
+
+.file .text {
+    color: #fff;
+    font-size: 5cqw;
+}
+
+/* Name */
+
+.wrap:has(.name) {
+    width: calc(100% - 8cqmin * 2);
+    height: 35cqmin;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.name {
+    font-size: var(--font-size-bottom);
+    line-height: 1.4em;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    overflow: hidden;
+    font-weight: normal;
+}

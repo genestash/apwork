@@ -1,0 +1,63 @@
+.fileInput {
+    display: none;
+}
+
+.images,
+.buttons {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 34px;
+}
+
+.images {
+    margin: 34px 0;
+    pointer-events: none;
+    user-select: none;
+}
+
+.wrap:has(.image) {
+    aspect-ratio: 1 / 1;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    border: 1px solid var(--border);
+    position: relative;
+    background-image: repeating-conic-gradient(#f8f9fa 0% 25%, #fff 0% 50%);
+    background-size: 20px 20px;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.processing {
+    animation: processing 1s infinite ease-in-out;
+    filter: grayscale(1);
+}
+
+@keyframes processing {
+    0% {
+        opacity: 0.1;
+    }
+
+    50% {
+        opacity: 0.6;
+    }
+
+    100% {
+        opacity: 0.1;
+    }
+}
+
+.buttons .wrap {
+    display: flex;
+    justify-content: center;
+}
