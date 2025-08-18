@@ -21,16 +21,12 @@
     margin: 34px 0 0 0;
 }
 
-.fileInput {
-    display: none;
-}
-
 .result {
     margin: 34px -34px -34px -34px;
     border-top: 1px solid var(--border);
     width: calc(100% + 34px * 2);
     height: var(--space-height);
-    padding: 0 10px;
+    padding: 0 7px;
     box-sizing: border-box;
     display: flex;
     align-items: center;
@@ -46,20 +42,21 @@
     min-width: 0;
     display: flex;
     align-items: center;
-    font-size: var(--font-size-small);
+    font-size: var(--font-size);
 }
 
 .image {
-    flex: 0 0 32px;
+    flex: 0 0 40px;
     aspect-ratio: 1 / 1;
     background-position: center;
     background-size: cover;
     border: 1px solid var(--border);
+    box-sizing: border-box;
     border-radius: 3px;
 }
 
 .name {
-    margin: 1px 10px 0 10px;
+    margin: 1px 10px 0 7px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;

@@ -79,7 +79,7 @@
     color: #000;
     background-color: #fff;
     border: 1px solid var(--border-dark);
-    box-shadow: var(--application-item-shadow), var(--application-window-shadow);
+    box-shadow: var(--application-shadow);
 }
 
 .white:hover {

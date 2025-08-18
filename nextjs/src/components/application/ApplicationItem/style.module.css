@@ -32,71 +32,27 @@
 
 /* Icon */
 
-.wrap:has(.icon),
-.wrap:has(.converter) {
+.wrap:has(.icon) {
     width: 100%;
     height: 65cqmin;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--border-dark);
 }
 
-.icon,
-.converter {
-    width: 38cqmin;
-    aspect-ratio: 1;
+.icon {
+    width: -webkit-fill-available;
+    height: -webkit-fill-available;
     position: relative;
     overflow: hidden;
-    border-radius: 3px;
+    border-radius: 8px;
 }
 
 .icon {
     background-position: center;
     background-repeat: no-repeat;
-    background-size: 100%;
-}
-
-/* Converter icon */
-
-.file {
-    width: 55%;
-    aspect-ratio: 0.7; /* 1/sqrt(2) */
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    clip-path: polygon(0 0, calc(100% - 7cqw) 0, 100% 7cqw, 100% 100%, 0 100%);
-    border-radius: 3px;
-}
-
-.file:after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 7cqw;
-    aspect-ratio: 1;
-    background-color: #fff;
-    opacity: 0.3;
-}
-
-.file.from {
-    top: 0;
-    left: 0;
-    background-color: var(--red);
-}
-
-.file.to {
-    right: 0;
-    bottom: 0;
-    background-color: var(--blue);
-}
-
-.file .text {
-    color: #fff;
-    font-size: 5cqw;
+    background-size: cover;
 }
 
 /* Name */

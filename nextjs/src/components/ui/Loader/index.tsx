@@ -16,7 +16,7 @@ const colors = {
 
 export function Loader({ size = 'small', color = 'black', className }: Props) {
     return (
-        <div className={[style.wrap, style[size], className].join(' ')}>
+        <div className={cn(style.wrap, style[size], className)}>
             <div className={style.circle} style={{ '--color': colors[color] } as React.CSSProperties}></div>
         </div>
     );

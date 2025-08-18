@@ -1,14 +1,13 @@
 import { notFound } from 'next/navigation';
 import { ClientPage } from './client';
 import { map } from '@/applications';
-
-import type { ApplicationItemDto } from '@/types/Application';
+import { ApplicationType } from '@/types/Application';
 
 interface Context {
     params: Promise<{ id: string }>;
 }
 
-async function getApplication(id: string): Promise<ApplicationItemDto | null> {
+async function getApplication(id: string): Promise<ApplicationType | null> {
     return map[id] || null;
 }
 

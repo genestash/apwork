@@ -1,10 +1,12 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import { Loaded } from '@/components/navigation';
 import { Button } from '@/components/ui';
 import style from './style.module.css';
-import { convertFileImage } from '@/utils';
+import { convertImage } from './convertImage';
+import { useBlobUrl } from '@/hooks/useBlobUrl';
+import { uploadFile, downloadFile } from '@/utils';
 
 type FilesData = { before: FileData; after: FileData };
 type FileData = { file?: File; url?: string };
@@ -13,46 +15,28 @@ export default function Application() {
     const [dragging, setDragging] = useState(false);
     const [processing, setProcessing] = useState(false);
 
-    const inputRef = useRef<HTMLInputElement>(null);
     const filesRef = useRef<FilesData>({ before: {}, after: {} });
     const dragCounter = useRef(0);
+    const newBlobUrl = useBlobUrl();
 
     const minProcessingTime = 1000;
 
-    // Clean Up
+    // File management
 
-    useEffect(() => {
-        const urls = filesRef.current;
-        return () => cleanUrls(urls);
-    }, []);
-
-    const cleanUrls = (files: FilesData) => {
-        if (files.before.url) URL.revokeObjectURL(files.before.url);
-        if (files.after.url) URL.revokeObjectURL(files.after.url);
-    };
-
-    // File Management
-
-    const handleUpload = () => {
-        inputRef.current?.click();
-    };
-
-    const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
-        const selectedFile = event.target.files?.[0];
-        if (!selectedFile) return;
-        event.target.value = '';
-        processFile(selectedFile);
+    const handleUpload = async () => {
+        const files = await uploadFile('image/webp');
+        if (!files) return;
+        processFile(files[0]);
     };
 
     const processFile = async (file: File) => {
         const processingStart = Date.now();
 
         setProcessing(true);
-        cleanUrls(filesRef.current);
-        filesRef.current.before = { file, url: URL.createObjectURL(file) };
+        filesRef.current.before = { file, url: newBlobUrl(file) };
 
-        const png = await convertFileImage(file, 'png');
-        filesRef.current.after = { file: png!, url: URL.createObjectURL(png!) };
+        const png = await convertImage(file, 'png');
+        filesRef.current.after = { file: png!, url: newBlobUrl(png!) };
 
         const processingDelay = minProcessingTime - (Date.now() - processingStart);
         setTimeout(setProcessing, processingDelay, false);
@@ -60,12 +44,9 @@ export default function Application() {
 
     const handleDownload = () => {
         if (!filesRef.current.after.file) return;
-        const link = document.createElement('a');
-        link.href = filesRef.current.after.url!;
-        link.download = filesRef.current.after.file.name;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+        const url = filesRef.current.after.url!;
+        const name = filesRef.current.after.file.name;
+        downloadFile(url, name);
     };
 
     // Drag and Drop
@@ -109,13 +90,12 @@ export default function Application() {
             onDragEnter={handleDragEnter}
             onDrop={handleDrop}
             onDragLeave={handleDragLeave}
-            className={[style.dropZone, dragging ? style.active : ''].join(' ')}
+            className={cn(style.dropZone, dragging ? style.active : '')}
         >
-            <p className={['h1', style.title].join(' ')}>Convert WEBP to PNG</p>
+            <p className={cn('h1', style.title)}>Convert WEBP to PNG</p>
             <Button color="blue" size="normal" className={style.button} onClick={handleUpload}>
                 Select File
             </Button>
-            <input ref={inputRef} type="file" accept="image/webp" onChange={handleFileChange} className={style.fileInput} />
             <div className={style.result}>
                 {filesRef.current.before.file ? (
                     <>
@@ -127,11 +107,11 @@ export default function Application() {
                             <div className={style.name}>{filesRef.current.before.file.name}</div>
                         </div>
                         {processing ? (
-                            <Button color="ghost" size="small" loading={true}>
+                            <Button color="ghost" size="normal" loading={true}>
                                 Processing
                             </Button>
                         ) : (
-                            <Button color="white" size="small" src={filesRef.current.after.url} onClick={handleDownload}>
+                            <Button color="white" size="normal" src={filesRef.current.after.url} onClick={handleDownload}>
                                 Download PNG
                             </Button>
                         )}

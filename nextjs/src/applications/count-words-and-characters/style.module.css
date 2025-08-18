@@ -17,6 +17,10 @@
     box-sizing: border-box;
 }
 
+.data b {
+    color: var(--blue);
+}
+
 .textarea {
     width: 100%;
     height: 100%;
@@ -27,4 +31,5 @@
     outline: none;
     border-bottom-left-radius: var(--border-radius);
     border-bottom-right-radius: var(--border-radius);
+    box-shadow: var(--input-shadow);
 }

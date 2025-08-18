@@ -8,7 +8,7 @@ type Props = {
 export function Block({ className, children }: Props) {
     return (
         <div className={style.wrap}>
-            <div className={[style.block, className].join(' ')}>{children}</div>
+            <div className={cn(style.block, className)}>{children}</div>
         </div>
     );
 }

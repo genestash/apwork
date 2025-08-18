@@ -1,38 +1,38 @@
-import { ApplicationItemDto } from '@/types/Application';
+import { ApplicationType } from '@/types/Application';
 
 // List
 
-const list: ApplicationItemDto[] = [
+const list: ApplicationType[] = [
     {
-        id: 'remove-background',
-        name: 'Remove Background',
-        description:
-            'This application allows you to quickly remove the background from any image using AI. Simply upload a photo, and the tool will generate a transparent version in seconds. Ideal for profile pictures, product images, or creative projects.',
-        icon: '/icons/remove-background.webp'
+        id: 'crop-image',
+        name: 'Crop Image',
+        icon: '/icons/crop-image.webp',
+        description: `Crop your images online with ease. Choose from freeform cropping, perfect squares, circles, or custom aspect ratios. Simply upload your photo, adjust the crop to your needs, and download instantly.`,
+        windowType: 'standard'
     },
     {
         id: 'webp-to-png-converter',
         name: 'WEBP to PNG Converter',
+        icon: '/icons/webp-to-png-converter.webp',
         description:
             "Easily convert your WEBP images to high-quality PNG format with this free online tool. Whether you're a designer, developer, or just need a quick format change, our converter ensures fast and accurate results without losing image quality.",
-        windowType: 'small',
-        converter: { from: 'WEBP', to: 'PNG' }
+        windowType: 'small'
     },
     {
         id: 'count-words-and-characters',
         name: 'Count Words and Characters',
+        icon: '/icons/count-words-and-characters.webp',
         description: `This tool helps you quickly see how many words and characters are in any text you enter. It's perfect for tracking your writing length in real time. The clean and responsive interface makes text editing effortless and convenient.`,
-        windowType: 'card',
-        icon: '/icons/count-words-and-characters.webp'
+        windowType: 'card'
     }
 ];
 
 // Map
 
-const map: Record<string, ApplicationItemDto> = {};
+const map: Record<string, ApplicationType> = {};
 
 for (const application of list) {
-    map[application.id!] = application;
+    map[application.id] = application;
 }
 
 // Export

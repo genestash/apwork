@@ -1,0 +1,123 @@
+.images {
+    width: 100%;
+    margin: 34px 0;
+    display: flex;
+    gap: 36px;
+    user-select: none;
+}
+
+.wrap:has(> .image) {
+    width: 50%;
+    aspect-ratio: 1 / 1;
+
+    overflow: hidden;
+    border: 1px solid var(--border);
+    position: relative;
+    background-image: repeating-conic-gradient(#f8f9fa 0% 25%, #fff 0% 50%);
+    background-size: 20px 20px;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image {
+    width: 100%;
+    aspect-ratio: 1;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    position: relative;
+}
+
+.buttons {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.buttons .wrap {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.mask {
+    position: absolute;
+    border: 2px solid #fff;
+    background: rgba(65, 105, 225, 0.2);
+    cursor: move;
+    box-sizing: border-box;
+}
+
+.mask::before {
+    content: '';
+    left: -2px;
+    top: -2px;
+    width: 100%;
+    height: 100%;
+    border: 2px dashed #4169e1;
+    position: absolute;
+}
+
+.mask:not(:active),
+.mask::before {
+    transition:
+        border-radius 0.1s linear,
+        width 0.1s linear,
+        height 0.1s linear;
+}
+
+.circle .mask,
+.circle .mask::before {
+    border-radius: 50%;
+}
+
+.resizeHandle {
+    position: absolute;
+    width: 11px;
+    height: 11px;
+    background: #4169e1;
+    border-radius: 50%;
+    cursor: se-resize;
+    right: -8px;
+    bottom: -8px;
+    border: 2px solid #fff;
+}
+
+.ratio {
+    height: 40px;
+    border: 1px solid var(--border);
+    border-top-color: var(--border-dark);
+    box-sizing: border-box;
+    border-radius: 4px;
+    display: flex;
+    overflow: hidden;
+    align-items: center;
+    position: relative;
+    box-shadow: var(--input-shadow);
+}
+
+.ratio .colon {
+    position: absolute;
+    left: calc(50% - 3px);
+    user-select: none;
+    pointer-events: none;
+}
+
+.ratio input {
+    width: 40px;
+    height: 40px;
+    outline: none;
+    padding: 0;
+    text-align: center;
+    border: 0;
+    padding: 1px 10px 0 9px;
+    background: transparent;
+}
+
+.download {
+    margin-left: auto;
+}

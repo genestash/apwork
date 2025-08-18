@@ -1,0 +1,14 @@
+.wrap {
+    height: 40px;
+    padding: 1px 13px 0 13px;
+    box-sizing: border-box;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    outline: none;
+}
+
+.square {
+    width: 40px;
+    padding: 1px 0 0 0;
+    text-align: center;
+}

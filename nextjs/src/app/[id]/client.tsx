@@ -2,11 +2,11 @@
 
 import dynamic from 'next/dynamic';
 import { ApplicationWindow } from '@/components/application';
+import { ApplicationType } from '@/types/Application';
 import style from './style.module.css';
-import type { ApplicationItemDto } from '@/types/Application';
 
-function ClientPage({ data }: { data: ApplicationItemDto }) {
-    const ApplicationComponent = dynamic<{ data: ApplicationItemDto }>(() => import('@/applications/' + data.id), {
+function ClientPage({ data }: { data: ApplicationType }) {
+    const Application = dynamic<{ data: ApplicationType }>(() => import('@/applications/' + data.id), {
         ssr: true,
         loading: () => null
     });
@@ -14,7 +14,7 @@ function ClientPage({ data }: { data: ApplicationItemDto }) {
     return (
         <>
             <ApplicationWindow type={data.windowType}>
-                <ApplicationComponent data={data} />
+                <Application data={data} />
             </ApplicationWindow>
             <section className={style.wrap}>
                 <div className={style.about}>

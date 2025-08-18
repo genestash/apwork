@@ -1,28 +1,22 @@
 'use client';
 
 import { useMemo } from 'react';
-import dynamic from 'next/dynamic';
+import { ApplicationItem } from '@/components/application';
+import { ApplicationType, ApplicationItemType } from '@/types/Application';
 import style from './style.module.css';
-import type { ApplicationItemDto } from '@/types/Application';
 
 type Props = {
-    items?: ApplicationItemDto[];
+    items?: ApplicationType[];
     min?: number;
     max?: number;
-    heading?: ApplicationItemDto['heading'];
+    heading?: ApplicationItemType['heading'];
 };
 
-const ApplicationItem = dynamic(() => import('@/components/application').then((module) => module.ApplicationItem), {
-    loading: () => null,
-    ssr: true
-});
-
-function buildList(items: ApplicationItemDto[] = [], min = -1, max = -1) {
-    const list: ApplicationItemDto[] = [];
+function buildList(items: ApplicationType[] = [], min = -1, max = -1) {
+    const list: ApplicationItemType[] = [];
 
     for (let i = 0; i < items.length; i += 1) {
         if (max !== -1 && list.length == max) break;
-        if (items[i].hide) continue;
         list.push(items[i]);
     }
 

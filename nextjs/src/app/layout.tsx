@@ -10,7 +10,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     return (
         <html lang="en">
             <head>
-                <link rel="icon" href="/favicon.png" />
                 <GoogleAnalytics gaId="G-CKCYSP1KVK" />
             </head>
             <body data-loading="true">

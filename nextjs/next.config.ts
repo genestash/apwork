@@ -23,6 +23,16 @@ const nextConfig: NextConfig = {
                 ]
             }
         ];
+    },
+
+    webpack: (config, { webpack }) => {
+        config.plugins.push(
+            new webpack.ProvidePlugin({
+                cn: 'classnames'
+            })
+        );
+
+        return config;
     }
 };
 

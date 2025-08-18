@@ -1,13 +1,11 @@
-import { list } from '@/applications';
-import { ApplicationItemDto } from '@/types/Application';
 import { MetadataRoute } from 'next';
+import { list } from '@/applications';
+import { ApplicationType } from '@/types/Application';
 
 export default function sitemap() {
     const result: MetadataRoute.Sitemap = [];
 
-    for (const application of list as ApplicationItemDto[]) {
-        if (application.hide) continue;
-
+    for (const application of list as ApplicationType[]) {
         result.push({
             url: `https://apwork.co/${application.id}`,
             changeFrequency: 'weekly'
