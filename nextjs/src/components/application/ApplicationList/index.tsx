@@ -43,7 +43,7 @@ export function ApplicationList({ items = [], min = 0 }: Props) {
         <section className={style.list} ref={ref}>
             <div className={style.ghostList}>
                 {ghostItems.map((_, index) => (
-                    <div key={index} className={style.ghostItem}></div>
+                    <ApplicationItem key={index} />
                 ))}
             </div>
             {items.map((item) => (

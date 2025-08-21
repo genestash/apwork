@@ -2,22 +2,17 @@
 .ghostList {
     display: grid;
     grid-gap: 20px;
-    grid-template-columns: repeat(auto-fill, 148px);
+    grid-template-columns: repeat(auto-fill, var(--item-width));
     justify-content: center;
     position: relative;
 }
 
 .ghostList {
     position: absolute;
-    left: calc(-1 * (148px + 20px));
-    width: calc(100% + (148px + 20px) * 2);
+    left: calc(-1 * (var(--item-width) + 20px));
+    width: calc(100% + (var(--item-width) + 20px) * 2);
     height: 100%;
-}
-
-.ghostItem {
-    aspect-ratio: 1;
-    border: 1px dashed var(--border);
-    border-radius: 8px;
+    z-index: -1;
 }
 
 .invisibleItem {
