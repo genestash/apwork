@@ -9,7 +9,7 @@
 .data {
     width: 100%;
     height: var(--space-height);
-    border-bottom: 1px solid var(--border-dark);
+    border-bottom: 1px solid var(--border);
     display: flex;
     align-items: center;
     gap: 20px;

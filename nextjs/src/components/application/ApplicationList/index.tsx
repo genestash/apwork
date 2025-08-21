@@ -1,43 +1,57 @@
 'use client';
 
-import { useMemo } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { ApplicationItem } from '@/components/application';
-import { ApplicationType, ApplicationItemType } from '@/types/Application';
+import { ApplicationType } from '@/types/Application';
 import style from './style.module.css';
 
 type Props = {
     items?: ApplicationType[];
     min?: number;
-    max?: number;
-    heading?: ApplicationItemType['heading'];
 };
 
-function buildList(items: ApplicationType[] = [], min = -1, max = -1) {
-    const list: ApplicationItemType[] = [];
+export function useGridSize(itemsCount: number, itemWidth: number, gridGap: number) {
+    const [cols, setCols] = useState(1);
+    const [rows, setRows] = useState(1);
+    const ref = useRef<HTMLDivElement>(null);
 
-    for (let i = 0; i < items.length; i += 1) {
-        if (max !== -1 && list.length == max) break;
-        list.push(items[i]);
-    }
+    useEffect(() => {
+        function handleResize() {
+            if (!ref.current) return;
+            const listWidth = ref.current.offsetWidth;
+            const calcCols = Math.max(1, Math.floor((listWidth + gridGap) / (itemWidth + gridGap)));
+            const calcRows = Math.ceil(itemsCount / calcCols);
+            setCols(calcCols);
+            setRows(calcRows);
+        }
 
-    const leftToAdd = min === -1 ? 0 : min - list.length;
+        handleResize();
 
-    for (let i = 0; i < leftToAdd; i += 1) {
-        list.push({ id: String(Math.random()), empty: true });
-    }
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, [itemsCount, itemWidth, gridGap]);
 
-    return list;
+    return { ref, cols, rows };
 }
 
-export function ApplicationList({ items, min, max, heading = 'h1' }: Props) {
-    const list = useMemo(() => buildList(items, min, max), [items, min, max]);
+export function ApplicationList({ items = [], min = 0 }: Props) {
+    const { ref, cols, rows } = useGridSize(Math.max(items.length, min), 148, 20);
+    const ghostItems = new Array((cols + 2) * rows).fill(null);
+    const invisibleItems = new Array(min - items.length).fill(null);
 
     return (
-        <section className={style.list}>
-            {list.map((item) => {
-                item.heading = heading;
-                return <ApplicationItem key={item.id} data={item} />;
-            })}
+        <section className={style.list} ref={ref}>
+            <div className={style.ghostList}>
+                {ghostItems.map((_, index) => (
+                    <div key={index} className={style.ghostItem}></div>
+                ))}
+            </div>
+            {items.map((item) => (
+                <ApplicationItem key={item.id} data={item} />
+            ))}
+            {invisibleItems.map((_, index) => (
+                <div key={index} className={style.invisibleItem}></div>
+            ))}
         </section>
     );
 }

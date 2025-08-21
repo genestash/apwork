@@ -14,7 +14,7 @@ export default function Page() {
         <Block className={style.block}>
             <h1 className={style.title}>Simple apps to make your life easier</h1>
             <p className={style.note}>Free, online, secure, no account required.</p>
-            <ApplicationList items={list} min={10} heading="h2" />
+            <ApplicationList items={list} min={10} />
             <Loaded />
         </Block>
     );

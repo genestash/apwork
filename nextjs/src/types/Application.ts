@@ -7,9 +7,4 @@ export type ApplicationType = {
     includeInstruction: boolean;
 };
 
-export type ApplicationItemType = Partial<ApplicationType> & {
-    heading?: 'h1' | 'h2' | 'h3';
-    empty?: boolean;
-};
-
 export type ApplicationWindowType = 'min' | 'mid' | 'max' | 'card';
