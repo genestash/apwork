@@ -1,6 +1,7 @@
 :root {
     --max-width: 900px;
-    --minor-width: 600px;
+    --mid-width: 600px;
+    --min-width: 400px;
 
     --blue: #4169e1;
     --red: #eb001b;

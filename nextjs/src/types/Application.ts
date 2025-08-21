@@ -4,6 +4,7 @@ export type ApplicationType = {
     icon: string;
     description: string;
     windowType: ApplicationWindowType;
+    includeInstruction: boolean;
 };
 
 export type ApplicationItemType = Partial<ApplicationType> & {
@@ -11,4 +12,4 @@ export type ApplicationItemType = Partial<ApplicationType> & {
     empty?: boolean;
 };
 
-export type ApplicationWindowType = 'small' | 'standard' | 'card' | 'fit' | 'wide';
+export type ApplicationWindowType = 'min' | 'mid' | 'max' | 'card';

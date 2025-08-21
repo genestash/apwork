@@ -1,0 +1,23 @@
+.fields {
+    padding-top: 28px;
+    width: -webkit-fill-available;
+}
+
+.fields label {
+    display: block;
+    text-align: start;
+    margin-bottom: 5px;
+}
+
+.fields .input {
+    width: -webkit-fill-available;
+    margin-bottom: calc(21px - 6px);
+}
+
+.blue b {
+    color: var(--blue);
+}
+
+.button {
+    margin-top: calc(34px - 15px);
+}

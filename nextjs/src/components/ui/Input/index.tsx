@@ -1,11 +1,16 @@
 import style from './style.module.css';
 
-type Props = {
+type Props = React.InputHTMLAttributes<HTMLInputElement> & {
     className?: string;
     value?: string | number;
-    square?: boolean;
+    units?: string;
 };
 
-export function Input({ className, value = '', square, ...rest }: Props) {
-    return <input className={cn(style.wrap, className, square ? style.square : '')} value={value} {...rest} />;
+export function Input({ className, value = '', units, ...rest }: Props) {
+    return (
+        <div className={cn(style.wrap, className)}>
+            <input className={style.input} value={value} spellCheck={false} autoComplete="off" {...rest} />
+            {units ? <b className={style.units}>{units}</b> : null}
+        </div>
+    );
 }

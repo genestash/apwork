@@ -1,14 +1,24 @@
 .wrap {
-    height: 40px;
-    padding: 1px 13px 0 13px;
-    box-sizing: border-box;
+    display: flex;
+    box-shadow: var(--input-shadow);
     border: 1px solid var(--border);
     border-radius: 4px;
-    outline: none;
 }
 
-.square {
-    width: 40px;
-    padding: 1px 0 0 0;
-    text-align: center;
+.input {
+    flex: 1;
+    height: 40px;
+    padding: 2px 13px 0 13px;
+    box-sizing: border-box;
+    outline: none;
+    border: 0;
+    background: transparent;
+}
+
+.units {
+    min-width: 40px;
+    padding: 8px 13px 0 13px;
+    box-sizing: border-box;
+    border-left: 1px dashed var(--border);
+    font-weight: normal;
 }

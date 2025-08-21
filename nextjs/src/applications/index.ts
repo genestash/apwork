@@ -8,7 +8,8 @@ const list: ApplicationType[] = [
         name: 'Crop Image',
         icon: '/icons/crop-image.webp',
         description: `Crop your images online with ease. Choose from freeform cropping, perfect squares, circles, or custom aspect ratios. Simply upload your photo, adjust the crop to your needs, and download instantly.`,
-        windowType: 'standard'
+        windowType: 'max',
+        includeInstruction: false
     },
     {
         id: 'webp-to-png-converter',
@@ -16,14 +17,24 @@ const list: ApplicationType[] = [
         icon: '/icons/webp-to-png-converter.webp',
         description:
             "Easily convert your WEBP images to high-quality PNG format with this free online tool. Whether you're a designer, developer, or just need a quick format change, our converter ensures fast and accurate results without losing image quality.",
-        windowType: 'small'
+        windowType: 'mid',
+        includeInstruction: false
     },
     {
         id: 'count-words-and-characters',
         name: 'Count Words and Characters',
         icon: '/icons/count-words-and-characters.webp',
         description: `This tool helps you quickly see how many words and characters are in any text you enter. It's perfect for tracking your writing length in real time. The clean and responsive interface makes text editing effortless and convenient.`,
-        windowType: 'card'
+        windowType: 'card',
+        includeInstruction: false
+    },
+    {
+        id: 'margin-calculator',
+        name: 'Margin Calculator',
+        icon: '/icons/margin-calculator.webp',
+        description: `Free Margin Calculator to quickly find profit margin, markup, cost, and price. Helps business owners, entrepreneurs, and online sellers make smarter pricing decisions and boost profitability.`,
+        windowType: 'min',
+        includeInstruction: false
     }
 ];
 

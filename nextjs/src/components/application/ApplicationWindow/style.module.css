@@ -7,6 +7,7 @@
 }
 
 .block {
+    width: 100%;
     padding: 34px;
     margin: auto;
     box-sizing: border-box;
@@ -23,26 +24,19 @@
     z-index: 1;
 }
 
-.block.small {
-    width: 100%;
-    max-width: var(--minor-width);
+.block.min {
+    max-width: var(--min-width);
 }
 
-.block.standard {
-    width: 100%;
+.block.mid {
+    max-width: var(--mid-width);
+}
+
+.block.max {
     max-width: var(--max-width);
 }
 
 .block.card {
-    width: 100%;
     max-width: var(--max-width);
-    aspect-ratio: 3 / 2;
-}
-
-.block.fit {
-    width: fit-content;
-}
-
-.block.wide {
-    width: 100%;
+    aspect-ratio: 1.5;
 }
