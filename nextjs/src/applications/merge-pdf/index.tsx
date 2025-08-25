@@ -114,7 +114,7 @@ export default function Application() {
 
             {processing === Processing.Uploading ? (
                 <Button className={style.button} color="blue" loading={true}>
-                    Processing
+                    Uploading
                 </Button>
             ) : (
                 <Button className={style.button} color="blue" onClick={addItems}>

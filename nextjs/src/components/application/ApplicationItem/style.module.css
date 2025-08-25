@@ -10,11 +10,12 @@
 
     user-select: none;
     cursor: pointer;
+
+    transition: color 0.05s;
 }
 
 .item:hover {
-    border-color: var(--blue);
-    outline: 1px solid var(--blue);
+    color: var(--blue);
 }
 
 .ghost {

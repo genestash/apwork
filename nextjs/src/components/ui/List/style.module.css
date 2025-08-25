@@ -24,15 +24,16 @@
 }
 
 .item.ghost {
-    width: var(--item-width);
     z-index: 100;
+    aspect-ratio: 1;
     position: fixed;
     pointer-events: none;
     opacity: 0.5;
 }
 
 .item.dragging {
-    opacity: 0;
+    opacity: 0.1;
+    filter: grayscale(1);
 }
 
 .gap {

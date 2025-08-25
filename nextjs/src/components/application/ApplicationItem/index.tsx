@@ -11,12 +11,10 @@ export function ApplicationItem({ data }: { data?: ApplicationType }) {
 
     return (
         <Link href={`/${data.id}`} className={style.item}>
-            <article>
-                <div className={style.icon} style={{ backgroundImage: `url("${data.icon}")` }}></div>
-                <div className={style.name}>
-                    <h2 className={style.text}>{data.name}</h2>
-                </div>
-            </article>
+            <div className={style.icon} style={{ backgroundImage: `url("${data.icon}")` }}></div>
+            <div className={style.name}>
+                <div className={style.text}>{data.name}</div>
+            </div>
         </Link>
     );
 }

@@ -12,8 +12,7 @@ type DraggingData = {
     index: number;
     startX: number;
     startY: number;
-    rectX: number;
-    rectY: number;
+    rect: DOMRect;
 };
 
 type Props<T> = {
@@ -24,8 +23,8 @@ type Props<T> = {
 export type ItemType<T> = {
     data: T;
     index: number;
-    dragging?: boolean;
-    swapping?: boolean;
+    dragging: boolean;
+    swapping: boolean;
 };
 
 // Components
@@ -44,14 +43,11 @@ export function List<T>({ list, Item }: Props<T>) {
         const isItem = target.classList.contains(style.item);
         if (!isItem) return;
 
-        const rect = target.getBoundingClientRect();
-
         draggingDataRef.current = {
             index: index,
             startX: event.clientX,
             startY: event.clientY,
-            rectX: rect.x,
-            rectY: rect.y
+            rect: target.getBoundingClientRect()
         };
 
         setIsDragging(true);
@@ -114,8 +110,9 @@ export function List<T>({ list, Item }: Props<T>) {
 
     useEffect(() => {
         if (!draggingItemRef.current || !draggingDataRef.current) return;
-        draggingItemRef.current.style.left = `${draggingDataRef.current.rectX}px`;
-        draggingItemRef.current.style.top = `${draggingDataRef.current.rectY}px`;
+        draggingItemRef.current.style.left = `${draggingDataRef.current.rect.x}px`;
+        draggingItemRef.current.style.top = `${draggingDataRef.current.rect.y}px`;
+        draggingItemRef.current.style.width = `${draggingDataRef.current.rect.width}px`;
     }, [isDragging]);
 
     useEffect(() => {
@@ -139,7 +136,7 @@ export function List<T>({ list, Item }: Props<T>) {
     return (
         <div className={style.list} onMouseOut={handleMouseOut}>
             {list.map((item, index) => {
-                const isDraggingThis = draggingDataRef.current && isDragging && draggingDataRef.current.index === index;
+                const isDraggingThis = Boolean(draggingDataRef.current && isDragging && draggingDataRef.current.index === index);
 
                 const handlers = {
                     onMouseDown: (event: React.MouseEvent) => startDragging(event, index)
@@ -150,11 +147,11 @@ export function List<T>({ list, Item }: Props<T>) {
                         <div className={cn(style.slot)} {...handlers}>
                             <Gap index={index} />
                             <div className={cn(style.item, isDraggingThis && style.dragging)}>
-                                <Item data={item} dragging={Boolean(isDraggingThis)} swapping={Boolean(false)} index={index} />
+                                <Item data={item} dragging={isDraggingThis} swapping={false} index={index} />
                             </div>
                             {isDraggingThis ? (
                                 <div ref={draggingItemRef} className={cn(style.item, style.ghost)}>
-                                    <Item data={item} dragging={Boolean(isDraggingThis)} swapping={Boolean(false)} index={index} />
+                                    <Item data={item} dragging={true} swapping={false} index={index} />
                                 </div>
                             ) : null}
                             <Gap index={index + 1} isLast={true} />
