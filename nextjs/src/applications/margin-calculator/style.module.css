@@ -14,10 +14,6 @@
     margin-bottom: calc(21px - 6px);
 }
 
-.blue b {
-    color: var(--blue);
-}
-
 .button {
     margin-top: calc(34px - 15px);
 }

@@ -6,7 +6,7 @@ import style from './style.module.css';
 
 type Props = {
     size?: 'small' | 'normal';
-    color?: 'ghost' | 'white' | 'blue';
+    color?: 'ghost' | 'white' | 'blue' | 'yellow';
     disable?: boolean;
     loading?: boolean;
     className?: string;
@@ -18,30 +18,11 @@ type Props = {
 };
 
 export function Button(props: Props) {
-    const {
-        size = 'normal',
-        color = 'white',
-        loading,
-        disable,
-        className,
-        href,
-        standardLink,
-        src,
-        onClick,
-        children,
-        ...rest
-    } = props;
+    const { size = 'normal', color = 'white', loading, disable, className, href, standardLink, src, onClick, children, ...rest } = props;
 
-    const styles = [
-        style.button,
-        style[size],
-        style[color],
-        loading ? style.loading : '',
-        disable ? style.disable : '',
-        className
-    ].join(' ');
+    const styles = [style.button, style[size], style[color], loading ? style.loading : '', disable ? style.disable : '', className].join(' ');
 
-    const loader = <>{loading ? <Loader size="small" className={style.loader} /> : null}</>;
+    const loader = <>{loading ? <Loader size="small" className={style.loader} color={color === 'blue' ? 'white' : 'black'} /> : null}</>;
 
     if (href && standardLink) {
         return (

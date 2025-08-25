@@ -1,15 +1,21 @@
 'use client';
 
+// Imports
+
 import { useState, useRef } from 'react';
 import { Loaded } from '@/components/navigation';
 import { Button } from '@/components/ui';
-import style from './style.module.css';
-import { convertImage } from './convertImage';
 import { useBlobUrl } from '@/hooks/useBlobUrl';
-import { uploadFile, downloadFile } from '@/utils';
+import { uploadFile, downloadFile } from '@/libs/files';
+import { convertImage } from './convertImage';
+import style from './style.module.css';
+
+// Types
 
 type FilesData = { before: FileData; after: FileData };
 type FileData = { file?: File; url?: string };
+
+// Components
 
 export default function Application() {
     const [dragging, setDragging] = useState(false);
@@ -25,7 +31,7 @@ export default function Application() {
 
     const handleUpload = async () => {
         const files = await uploadFile('image/webp');
-        if (!files) return;
+        if (!files[0]) return;
         processFile(files[0]);
     };
 
@@ -85,13 +91,7 @@ export default function Application() {
     // Layout
 
     return (
-        <div
-            onDragOver={handleDragOver}
-            onDragEnter={handleDragEnter}
-            onDrop={handleDrop}
-            onDragLeave={handleDragLeave}
-            className={cn(style.dropZone, dragging ? style.active : '')}
-        >
+        <div onDragOver={handleDragOver} onDragEnter={handleDragEnter} onDrop={handleDrop} onDragLeave={handleDragLeave} className={cn(style.dropZone, dragging ? style.active : '')}>
             <p className={cn('h1', style.title)}>Convert WEBP to PNG</p>
             <Button color="blue" size="normal" className={style.button} onClick={handleUpload}>
                 Select File
@@ -100,10 +100,7 @@ export default function Application() {
                 {filesRef.current.before.file ? (
                     <>
                         <div className={style.preview}>
-                            <div
-                                className={style.image}
-                                style={{ backgroundImage: `url(${filesRef.current.before.url})` }}
-                            ></div>
+                            <div className={style.image} style={{ backgroundImage: `url(${filesRef.current.before.url})` }}></div>
                             <div className={style.name}>{filesRef.current.before.file.name}</div>
                         </div>
                         {processing ? (
@@ -111,7 +108,7 @@ export default function Application() {
                                 Processing
                             </Button>
                         ) : (
-                            <Button color="white" size="normal" src={filesRef.current.after.url} onClick={handleDownload}>
+                            <Button color="yellow" size="normal" src={filesRef.current.after.url} onClick={handleDownload}>
                                 Download PNG
                             </Button>
                         )}

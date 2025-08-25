@@ -11,13 +11,11 @@ function ClientPage({ data }: { data: ApplicationType }) {
         loading: () => null
     });
 
-    const Instruction = data.includeInstruction
-        ? dynamic(() => import(`@/applications/${data.id}/instruction`), { ssr: true, loading: () => null })
-        : null;
+    const Instruction = data.includeInstruction ? dynamic(() => import(`@/applications/${data.id}/instruction`), { ssr: true, loading: () => null }) : null;
 
     return (
         <>
-            <ApplicationWindow type={data.windowType}>
+            <ApplicationWindow size={data.windowSize} ratio={data.windowRatio}>
                 <Application data={data} />
             </ApplicationWindow>
             <section className={style.wrap}>

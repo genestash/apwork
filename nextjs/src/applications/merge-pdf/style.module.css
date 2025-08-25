@@ -1,0 +1,129 @@
+.wrap {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.wrap.processing {
+    pointer-events: none;
+}
+
+.button {
+    margin: 34px 0;
+    width: fit-content;
+}
+
+.list {
+    flex: 1;
+    border-top: 1px solid var(--border);
+    width: 100%;
+    padding: 34px 34px 0 34px;
+    display: flex;
+    align-self: center;
+    justify-content: center;
+}
+
+.list .note {
+    margin: auto;
+}
+
+.result {
+    margin-top: 34px;
+    border-top: 1px solid var(--border);
+    width: 100%;
+    padding: 34px 34px 2px 34px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.result .note {
+    height: 40px;
+    padding-top: 1px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+}
+
+.item {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    pointer-events: none;
+    position: relative;
+}
+
+.item > .image {
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.name {
+    border-top: 1px solid var(--border);
+    font-size: var(--font-size-bottom);
+    width: 100%;
+    height: 25px;
+    padding: 1px 7px 0 7px;
+    box-sizing: border-box;
+    overflow: hidden;
+    text-wrap: nowrap;
+    text-overflow: ellipsis;
+}
+
+.buttons {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.buttons > div {
+    border-radius: 100%;
+    background-color: #fff;
+    pointer-events: all;
+    cursor: pointer;
+    width: 25px;
+    aspect-ratio: 1;
+    z-index: 1;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.buttons .image {
+    aspect-ratio: 1;
+    background: #000;
+    transition: background-color 0.05s;
+}
+
+.buttons .rotate {
+    margin-left: 2px;
+}
+
+.buttons .rotate:hover .image {
+    background-color: var(--blue);
+}
+
+.buttons .delete:hover .image {
+    background-color: var(--red);
+}
+
+.buttons .rotate .image {
+    width: 75%;
+    mask: url('/rotate.png') no-repeat center / contain;
+}
+
+.buttons .delete .image {
+    width: 50%;
+    mask: url('/x.png') no-repeat center / contain;
+}

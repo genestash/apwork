@@ -6,6 +6,7 @@
 
     --blue: #4169e1;
     --red: #eb001b;
+    --yellow-color: #ffcc00;
     --sand-color: #f8f7f6;
 
     --border: rgba(0, 0, 0, 0.14);
@@ -35,7 +36,7 @@
     --font-size-bottom: calc(13 / 16 * 1rem);
     --font-size-small: calc(14 / 16 * 1rem);
     --font-size-logo: calc(20 / 16 * 1rem);
-    --font-size-title: calc(26 / 16 * 1rem);
+    --font-size-title: calc(28 / 16 * 1rem);
     --font-height: 1.62;
 }
 
@@ -50,7 +51,8 @@ button {
 }
 
 ::placeholder {
-    color: #8f8f8f;
+    color: #000;
+    opacity: 0.5;
 }
 
 ::selection {
@@ -102,4 +104,16 @@ h2,
 
 h2 {
     font-size: calc(var(--font-size-title) * 0.75);
+}
+
+/* Cursor */
+
+body[data-cursor='move'] * {
+    cursor: move !important;
+}
+
+/* Accessibility */
+
+:focus-visible {
+    outline: 1px dashed #000;
 }

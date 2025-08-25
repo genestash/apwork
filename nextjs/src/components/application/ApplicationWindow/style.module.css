@@ -24,19 +24,18 @@
     z-index: 1;
 }
 
-.block.min {
+.block[data-size='min'] {
     max-width: var(--min-width);
 }
 
-.block.mid {
+.block[data-size='mid'] {
     max-width: var(--mid-width);
 }
 
-.block.max {
+.block[data-size='max'] {
     max-width: var(--max-width);
 }
 
-.block.card {
-    max-width: var(--max-width);
+.block[data-ratio='1.5'] {
     aspect-ratio: 1.5;
 }

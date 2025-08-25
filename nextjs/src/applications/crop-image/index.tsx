@@ -6,7 +6,8 @@ import { Loaded } from '@/components/navigation';
 import { Button, Select } from '@/components/ui';
 import { useWindowResize } from '@/hooks/useWindowResize';
 import { useBlobUrl } from '@/hooks/useBlobUrl';
-import { uploadFile, downloadFile, sleep } from '@/utils';
+import { uploadFile, downloadFile } from '@/libs/files';
+import { sleep } from '@/utils';
 
 // Style imports
 
@@ -254,7 +255,7 @@ export default function Application() {
 
     const handleUpload = async () => {
         const files = await uploadFile('image/*');
-        if (!files) return;
+        if (!files[0]) return;
         setBefore(newBlobUrl(files[0]));
     };
 
@@ -324,13 +325,7 @@ export default function Application() {
         };
     };
 
-    const applyRelativeMask = (
-        relativeMask: MaskData,
-        displayW: number,
-        displayH: number,
-        offsetX: number,
-        offsetY: number
-    ) => {
+    const applyRelativeMask = (relativeMask: MaskData, displayW: number, displayH: number, offsetX: number, offsetY: number) => {
         return {
             x: offsetX + relativeMask.x * displayW,
             y: offsetY + relativeMask.y * displayH,
@@ -531,25 +526,13 @@ export default function Application() {
 
                 {shape === CropType.Ratio && (
                     <div className={style.ratio}>
-                        <input
-                            value={ratio.aRaw}
-                            onChange={handleRatioChange}
-                            onBlur={handleRatioBlur}
-                            autoComplete="off"
-                            name="a"
-                        />
+                        <input value={ratio.aRaw} onChange={handleRatioChange} onBlur={handleRatioBlur} autoComplete="off" name="a" />
                         <div className={style.colon}>:</div>
-                        <input
-                            value={ratio.bRaw}
-                            onChange={handleRatioChange}
-                            onBlur={handleRatioBlur}
-                            autoComplete="off"
-                            name="b"
-                        />
+                        <input value={ratio.bRaw} onChange={handleRatioChange} onBlur={handleRatioBlur} autoComplete="off" name="b" />
                     </div>
                 )}
 
-                <Button color="white" size="normal" onClick={handleDownload} loading={processing} className={style.download}>
+                <Button color="yellow" size="normal" onClick={handleDownload} loading={processing} className={style.download}>
                     {processing ? 'Processing' : 'Download Result'}
                 </Button>
             </div>

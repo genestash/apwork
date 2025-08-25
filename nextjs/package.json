@@ -10,11 +10,14 @@
     "dependencies": {
         "@next/third-parties": "^15.4.6",
         "next": "^15.4.6",
+        "pdf-lib": "^1.17.1",
+        "pdfjs-dist": "^5.4.54",
         "react": "^19.0.0",
         "react-dom": "^19.0.0"
     },
     "devDependencies": {
         "@eslint/eslintrc": "^3",
+        "@types/css": "^0.0.38",
         "@types/node": "^20",
         "@types/react": "^19",
         "@types/react-dom": "^19",

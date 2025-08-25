@@ -197,17 +197,7 @@ export default function Application() {
                 {data.map((field) => (
                     <Fragment key={field.name}>
                         <label htmlFor={`${componentId}-${field.name}`}>{field.name}</label>
-                        <Input
-                            id={`${componentId}-${field.name}`}
-                            name={field.name}
-                            units={field.units}
-                            value={field.input}
-                            placeholder="0.00"
-                            onFocus={handleFocus}
-                            onChange={handleInput}
-                            onBlur={handleBlur}
-                            className={cn(style.input, field.name === 'Margin' && style.blue)}
-                        />
+                        <Input id={`${componentId}-${field.name}`} name={field.name} units={field.units} className={style.input} value={field.input} placeholder="0.00" onFocus={handleFocus} onChange={handleInput} onBlur={handleBlur} />
                     </Fragment>
                 ))}
             </div>

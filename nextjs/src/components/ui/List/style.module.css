@@ -1,0 +1,59 @@
+.list {
+    width: 100%;
+    height: min-content;
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(var(--item-width), 1fr));
+    justify-content: center;
+    user-select: none;
+    position: relative;
+}
+
+.slot {
+    position: relative;
+}
+
+.item {
+    width: 100%;
+    aspect-ratio: 1;
+    border: 1px solid var(--border);
+    box-sizing: border-box;
+    background-color: #fff;
+    border-radius: 8px;
+    cursor: move;
+}
+
+.item.ghost {
+    width: var(--item-width);
+    z-index: 100;
+    position: fixed;
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+.item.dragging {
+    opacity: 0;
+}
+
+.gap {
+    width: 20px;
+    height: 100%;
+    top: 0;
+    left: -20px;
+    position: absolute;
+}
+
+.gap.last {
+    left: auto;
+    right: -20px;
+}
+
+.gap.active:hover:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: calc(50% - 1px);
+    width: 2px;
+    height: 100%;
+    background-color: var(--blue);
+}

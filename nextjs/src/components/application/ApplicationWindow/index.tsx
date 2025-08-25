@@ -1,18 +1,21 @@
 'use client';
 
 import style from './style.module.css';
-import { ApplicationWindowType } from '@/types/Application';
+import { ApplicationWindowSize, ApplicationWindowRatio } from '@/types/Application';
 
 type Props = {
-    type: ApplicationWindowType;
+    size: ApplicationWindowSize;
+    ratio?: ApplicationWindowRatio;
     className?: string;
     children: React.ReactNode;
 };
 
-export function ApplicationWindow({ type, className, children }: Props) {
+export function ApplicationWindow({ size, ratio, className, children }: Props) {
     return (
         <section className={style.wrap}>
-            <div className={cn(style.block, style[type], className)}>{children}</div>
+            <div className={cn(style.block, className)} data-size={size} data-ratio={ratio}>
+                {children}
+            </div>
         </section>
     );
 }

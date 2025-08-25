@@ -11,7 +11,6 @@
     overflow: hidden;
     position: relative;
     transition: background-color 0.05s;
-    border: 1px solid #000;
 }
 
 /* Disable */
@@ -62,6 +61,7 @@
 .blue {
     color: #fff;
     background-color: var(--blue);
+    border: 1px solid #000;
     border-color: color-mix(in srgb, var(--blue) 65%, #000);
 }
 
@@ -88,6 +88,24 @@
 
 .white:active {
     background-color: color-mix(in srgb, #fff 94%, #000);
+}
+
+/* Yellow */
+
+.yellow {
+    color: #000;
+    background-color: var(--yellow-color);
+    box-shadow: var(--application-shadow);
+    border: 1px solid #000;
+    border-color: color-mix(in srgb, var(--yellow-color) 75%, #000);
+}
+
+.yellow:hover {
+    background-color: color-mix(in srgb, var(--yellow-color) 95%, #000);
+}
+
+.yellow:active {
+    background-color: color-mix(in srgb, var(--yellow-color) 90%, #000);
 }
 
 /* img */

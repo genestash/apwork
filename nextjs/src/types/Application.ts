@@ -3,8 +3,10 @@ export type ApplicationType = {
     name: string;
     icon: string;
     description: string;
-    windowType: ApplicationWindowType;
-    includeInstruction: boolean;
+    windowSize: ApplicationWindowSize;
+    windowRatio?: ApplicationWindowRatio;
+    includeInstruction?: boolean;
 };
 
-export type ApplicationWindowType = 'min' | 'mid' | 'max' | 'card';
+export type ApplicationWindowSize = 'min' | 'mid' | 'max';
+export type ApplicationWindowRatio = '1.5';
