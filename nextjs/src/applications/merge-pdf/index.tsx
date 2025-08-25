@@ -8,7 +8,7 @@ import { Button, List } from '@/components/ui';
 import { useBlobUrl } from '@/hooks/useBlobUrl';
 import { useRender } from '@/hooks/useRender';
 import { uploadFile, downloadFile } from '@/libs/files';
-import { sleep } from '@/utils';
+import { simulateProcessing } from '@/utils';
 import { getPdfPageImage } from '@/libs/getPdfPageImage';
 import { mergePdfs } from '@/libs/mergePdfs';
 import style from './style.module.css';
@@ -29,10 +29,6 @@ enum Processing {
     Downloading
 }
 
-// Constants
-
-const minProcessingTime = 1000;
-
 // Components
 
 export default function Application() {
@@ -46,6 +42,7 @@ export default function Application() {
 
     const addItems = async () => {
         const files = await uploadFile('application/pdf', true);
+        const waitProcessing = simulateProcessing(1000);
         setProcessing(Processing.Uploading);
 
         for await (const file of files) {
@@ -61,6 +58,7 @@ export default function Application() {
             });
         }
 
+        await waitProcessing();
         setProcessing(Processing.Free);
     };
 
@@ -80,11 +78,11 @@ export default function Application() {
     };
 
     const mergeItems = async () => {
-        const processingStart = Date.now();
+        const waitProcessing = simulateProcessing(1000);
         setProcessing(Processing.Downloading);
         const blob = await mergePdfs(list.current);
         const url = newBlobUrl(blob);
-        await sleep(minProcessingTime - (Date.now() - processingStart));
+        await waitProcessing();
         setProcessing(Processing.Free);
         downloadFile(url, `${Date.now()}.pdf`);
     };

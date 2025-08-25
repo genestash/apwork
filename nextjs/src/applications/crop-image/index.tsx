@@ -7,7 +7,7 @@ import { Button, Select } from '@/components/ui';
 import { useWindowResize } from '@/hooks/useWindowResize';
 import { useBlobUrl } from '@/hooks/useBlobUrl';
 import { uploadFile, downloadFile } from '@/libs/files';
-import { sleep } from '@/utils';
+import { simulateProcessing } from '@/utils';
 
 // Style imports
 
@@ -50,8 +50,6 @@ type RatioData = {
 };
 
 // Variables
-
-const minProcessingTime = 1000;
 
 const exampleMask = {
     x: 35 / 395,
@@ -262,6 +260,7 @@ export default function Application() {
     const handleDownload = async () => {
         if (!imageData) return;
         setProcessing(true);
+        const waitProcessing = simulateProcessing(1000);
 
         const { img, scale, offsetX, offsetY } = imageData;
         const X = (mask.x - offsetX) / scale;
@@ -286,7 +285,7 @@ export default function Application() {
         const url = newBlobUrl(blob);
         const name = `${Date.now()}.png`;
 
-        await sleep(minProcessingTime);
+        await waitProcessing();
         downloadFile(url, name);
         setProcessing(false);
     };

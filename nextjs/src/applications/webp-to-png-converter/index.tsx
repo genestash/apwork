@@ -7,6 +7,7 @@ import { Loaded } from '@/components/navigation';
 import { Button } from '@/components/ui';
 import { useBlobUrl } from '@/hooks/useBlobUrl';
 import { uploadFile, downloadFile } from '@/libs/files';
+import { simulateProcessing } from '@/utils';
 import { convertImage } from './convertImage';
 import style from './style.module.css';
 
@@ -25,8 +26,6 @@ export default function Application() {
     const dragCounter = useRef(0);
     const newBlobUrl = useBlobUrl();
 
-    const minProcessingTime = 1000;
-
     // File management
 
     const handleUpload = async () => {
@@ -36,16 +35,15 @@ export default function Application() {
     };
 
     const processFile = async (file: File) => {
-        const processingStart = Date.now();
-
         setProcessing(true);
-        filesRef.current.before = { file, url: newBlobUrl(file) };
+        const waitProcessing = simulateProcessing(1000);
 
+        filesRef.current.before = { file, url: newBlobUrl(file) };
         const png = await convertImage(file, 'png');
         filesRef.current.after = { file: png!, url: newBlobUrl(png!) };
 
-        const processingDelay = minProcessingTime - (Date.now() - processingStart);
-        setTimeout(setProcessing, processingDelay, false);
+        await waitProcessing();
+        setProcessing(false);
     };
 
     const handleDownload = () => {
