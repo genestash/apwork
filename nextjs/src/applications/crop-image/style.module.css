@@ -1,3 +1,11 @@
+.window {
+    width: 100%;
+}
+
+.window.processing {
+    pointer-events: none;
+}
+
 .images {
     width: 100%;
     margin: 34px 0;

@@ -89,7 +89,7 @@ export default function Application() {
     // Layout
 
     return (
-        <div onDragOver={handleDragOver} onDragEnter={handleDragEnter} onDrop={handleDrop} onDragLeave={handleDragLeave} className={cn(style.dropZone, dragging ? style.active : '')}>
+        <div onDragOver={handleDragOver} onDragEnter={handleDragEnter} onDrop={handleDrop} onDragLeave={handleDragLeave} className={cn(style.window, dragging ? style.active : '', processing && style.processing)}>
             <p className={cn('h1', style.title)}>Convert WEBP to PNG</p>
             <Button color="blue" size="normal" className={style.button} onClick={handleUpload}>
                 Select File

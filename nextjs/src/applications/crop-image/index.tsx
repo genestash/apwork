@@ -7,7 +7,7 @@ import { Button, Select } from '@/components/ui';
 import { useWindowResize } from '@/hooks/useWindowResize';
 import { useBlobUrl } from '@/hooks/useBlobUrl';
 import { uploadFile, downloadFile } from '@/libs/files';
-import { getFileType, simulateProcessing } from '@/utils';
+import { getFileType, simulateProcessing, sleep } from '@/utils';
 
 // Style imports
 
@@ -49,6 +49,12 @@ type RatioData = {
     bRaw: string | number;
 };
 
+enum Processing {
+    Free,
+    Uploading,
+    Downloading
+}
+
 // Variables
 
 const exampleMask = {
@@ -63,7 +69,7 @@ const exampleMask = {
 export default function Application() {
     // State
 
-    const [processing, setProcessing] = useState(false);
+    const [processing, setProcessing] = useState<Processing>(Processing.Free);
     const [before, setBefore] = useState(exampleImage.src);
     const [shape, setShape] = useState(CropType.Free);
     const [ratio, setRatio] = useState<RatioData>({ a: 4, b: 3, aRaw: 4, bRaw: 3 });
@@ -265,7 +271,7 @@ export default function Application() {
 
     const handleDownload = async () => {
         if (!imageData) return;
-        setProcessing(true);
+        setProcessing(Processing.Downloading);
         const waitProcessing = simulateProcessing(1000);
 
         const { img, scale, offsetX, offsetY } = imageData;
@@ -276,8 +282,6 @@ export default function Application() {
 
         const canvas = new OffscreenCanvas(W, H);
         const context = canvas.getContext('2d')!;
-
-        // Apply circular clipping for circle crop
 
         if (shape === CropType.Circle) {
             context.beginPath();
@@ -293,7 +297,7 @@ export default function Application() {
 
         await waitProcessing();
         downloadFile(url, name);
-        setProcessing(false);
+        setProcessing(Processing.Free);
     };
 
     // Utility functions
@@ -489,7 +493,7 @@ export default function Application() {
     // Layout
 
     return (
-        <>
+        <div className={cn(style.window, processing !== Processing.Free && style.processing)}>
             <p className="h1">Crop Image</p>
 
             <div className={style.images}>
@@ -517,8 +521,8 @@ export default function Application() {
             </div>
 
             <div className={style.buttons}>
-                <Button color="blue" size="normal" onClick={handleUpload}>
-                    Select File
+                <Button color="blue" size="normal" loading={processing === Processing.Uploading} onClick={handleUpload}>
+                    {processing === Processing.Uploading ? 'Uploading' : 'Select File'}
                 </Button>
 
                 <Select
@@ -537,12 +541,12 @@ export default function Application() {
                     </div>
                 )}
 
-                <Button color="yellow" size="normal" onClick={handleDownload} loading={processing} className={style.download}>
-                    {processing ? 'Processing' : 'Download Result'}
+                <Button color="yellow" size="normal" onClick={handleDownload} loading={processing === Processing.Downloading} className={style.download}>
+                    {processing === Processing.Downloading ? 'Processing' : 'Download Result'}
                 </Button>
             </div>
 
             <Loaded />
-        </>
+        </div>
     );
 }

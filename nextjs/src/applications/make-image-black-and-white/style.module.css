@@ -1,9 +1,16 @@
+.window {
+    width: 100%;
+}
+
+.window.processing {
+    pointer-events: none;
+}
+
 .images {
     width: 100%;
     margin: 34px 0;
     display: flex;
     gap: 36px;
-    user-select: none;
 }
 
 .wrap:has(.image) {
@@ -32,18 +39,11 @@
 
 .buttons {
     width: 100%;
-    display: flex;
-    justify-content: flex-start;
-    gap: 20px;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 34px;
 }
 
-.buttons .wrap {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-}
-
-.download {
-    margin-left: auto;
+.button {
+    margin: auto;
 }

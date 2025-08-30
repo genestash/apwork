@@ -1,4 +1,4 @@
-.dropZone {
+.window {
     margin: -34px;
     padding: 34px;
     width: 100%;
@@ -7,10 +7,14 @@
     align-items: center;
 }
 
-.dropZone.active {
+.window.active {
     border-radius: 16px;
     outline: 2px dashed var(--blue);
     pointer-events: all;
+}
+
+.window.processing {
+    pointer-events: none;
 }
 
 .title {
