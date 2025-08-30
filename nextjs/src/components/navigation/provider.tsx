@@ -75,7 +75,7 @@ export function LoadingProvider({ minDelay = 0, children }: Props) {
 
         window.addEventListener('popstate', handlePopstate);
         return () => window.removeEventListener('popstate', handlePopstate);
-    }, []);
+    }, [setLoading]);
 
     return (
         <LoadingContext.Provider value={{ reloadPage, loadPage, setLoading }} key={reloadKey}>
