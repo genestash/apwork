@@ -7,7 +7,7 @@ import { Button, Select } from '@/components/ui';
 import { useWindowResize } from '@/hooks/useWindowResize';
 import { useBlobUrl } from '@/hooks/useBlobUrl';
 import { uploadFile, downloadFile } from '@/libs/files';
-import { getFileType, simulateProcessing, sleep } from '@/utils';
+import { getFileType, simulateProcessing } from '@/utils';
 
 // Style imports
 

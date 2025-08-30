@@ -1,6 +1,7 @@
 {
     "scripts": {
         "format": "prettier . --write",
+        "lint": "next lint --no-cache",
         "dev": "next dev",
         "build": "rm -rf .next && next build",
         "start": "next start"

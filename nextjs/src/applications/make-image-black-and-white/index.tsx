@@ -4,7 +4,7 @@ import { Button } from '@/components/ui';
 import { useBlobUrl } from '@/hooks/useBlobUrl';
 import { downloadFile, uploadFile } from '@/libs/files';
 import { grayscaleImage } from '@/libs/grayscaleImage';
-import { getFileType, simulateProcessing, sleep } from '@/utils';
+import { getFileType, sleep } from '@/utils';
 
 // Import styles
 
