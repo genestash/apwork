@@ -46,12 +46,6 @@
     flex-wrap: wrap;
 }
 
-.buttons .wrap {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-}
-
 .mask {
     position: absolute;
     border: 2px solid #fff;

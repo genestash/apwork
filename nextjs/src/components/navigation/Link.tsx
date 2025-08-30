@@ -5,7 +5,7 @@ import { useLoading } from './provider';
 import { unselectAll } from '@/utils';
 
 export function Link({ href, className, children, ...rest }: { href: string; className?: string; children: React.ReactNode }) {
-    const { reloadPage, openPage } = useLoading();
+    const { reloadPage, loadPage } = useLoading();
     const pathname = usePathname();
 
     const handleClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
@@ -21,7 +21,7 @@ export function Link({ href, className, children, ...rest }: { href: string; cla
         if (href === pathname) {
             reloadPage();
         } else {
-            openPage(href);
+            loadPage(href);
         }
     };
 

@@ -1,11 +1,11 @@
 'use client';
 
-import { createContext, useContext, useState, useRef, useCallback } from 'react';
+import { createContext, useContext, useState, useRef, useCallback, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
 type Context = {
     reloadPage: () => void;
-    openPage: (href: string) => void;
+    loadPage: (href: string) => void;
     setLoading: (state: boolean) => void;
 };
 
@@ -55,11 +55,11 @@ export function LoadingProvider({ minDelay = 0, children }: Props) {
 
     const reloadPage = useCallback(() => {
         setLoading(true);
-        setReloadKey((v) => v + 1);
+        setReloadKey(Math.random());
         window.scrollTo(0, 0);
     }, [setLoading]);
 
-    const openPage = useCallback(
+    const loadPage = useCallback(
         (href: string) => {
             setLoading(true);
             router.push(href);
@@ -67,8 +67,18 @@ export function LoadingProvider({ minDelay = 0, children }: Props) {
         [setLoading, router]
     );
 
+    useEffect(() => {
+        const handlePopstate = () => {
+            setLoading(true);
+            setReloadKey(Math.random());
+        };
+
+        window.addEventListener('popstate', handlePopstate);
+        return () => window.removeEventListener('popstate', handlePopstate);
+    }, []);
+
     return (
-        <LoadingContext.Provider value={{ reloadPage, openPage, setLoading }} key={reloadKey}>
+        <LoadingContext.Provider value={{ reloadPage, loadPage, setLoading }} key={reloadKey}>
             {children}
         </LoadingContext.Provider>
     );
