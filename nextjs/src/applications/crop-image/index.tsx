@@ -7,7 +7,7 @@ import { Button, Select } from '@/components/ui';
 import { useWindowResize } from '@/hooks/useWindowResize';
 import { useBlobUrl } from '@/hooks/useBlobUrl';
 import { uploadFile, downloadFile } from '@/libs/files';
-import { simulateProcessing } from '@/utils';
+import { getFileType, simulateProcessing } from '@/utils';
 
 // Style imports
 
@@ -71,6 +71,7 @@ export default function Application() {
     const [dragging, setDragging] = useState(false);
     const [resizing, setResizing] = useState(false);
     const [imageData, setImageData] = useState<ImageData | null>(null);
+    const [fileType, setFileType] = useState('webp');
 
     // Refs
 
@@ -254,7 +255,12 @@ export default function Application() {
     const handleUpload = async () => {
         const files = await uploadFile('image/*');
         if (!files[0]) return;
+
+        const type = getFileType(files[0].name);
+        if (!type) return;
+
         setBefore(newBlobUrl(files[0]));
+        setFileType(type);
     };
 
     const handleDownload = async () => {
@@ -281,9 +287,9 @@ export default function Application() {
         }
 
         context.drawImage(img, X, Y, W, H, 0, 0, canvas.width, canvas.height);
-        const blob = await canvas.convertToBlob({ type: 'image/png' });
+        const blob = await canvas.convertToBlob({ type: `image/${fileType}` });
         const url = newBlobUrl(blob);
-        const name = `${Date.now()}.png`;
+        const name = `${Date.now()}.${fileType}`;
 
         await waitProcessing();
         downloadFile(url, name);

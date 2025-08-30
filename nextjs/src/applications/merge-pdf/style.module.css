@@ -120,10 +120,10 @@
 
 .buttons .rotate .image {
     width: 75%;
-    mask: url('/rotate.png') no-repeat center / contain;
+    mask: url('/ui/rotate.webp') no-repeat center / contain;
 }
 
 .buttons .delete .image {
     width: 50%;
-    mask: url('/x.png') no-repeat center / contain;
+    mask: url('/ui/delete.webp') no-repeat center / contain;
 }

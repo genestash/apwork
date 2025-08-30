@@ -19,3 +19,11 @@ export function simulateProcessing(time: number) {
         await sleep(timeLeft);
     };
 }
+
+/**
+ * @example file.txt => txt
+ */
+export function getFileType(name: string): string {
+    const type = name.match(/.\.([a-z]+)$/i);
+    return type ? type[1].toLowerCase() : '';
+}

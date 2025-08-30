@@ -10,6 +10,7 @@ const list: ApplicationType[] = [
         description: `Crop your images online with ease. Choose from freeform cropping, perfect squares, circles, or custom aspect ratios. Simply upload your photo, adjust the crop to your needs, and download instantly.`,
         windowSize: 'max'
     },
+
     {
         id: 'webp-to-png-converter',
         name: 'WEBP to PNG Converter',
@@ -27,12 +28,13 @@ const list: ApplicationType[] = [
         windowRatio: '1.5'
     },
     {
-        id: 'margin-calculator',
-        name: 'Margin Calculator',
-        icon: '/icons/margin-calculator.webp',
-        description: `Free Margin Calculator to quickly find profit margin, markup, cost, and price. Helps business owners, entrepreneurs, and online sellers make smarter pricing decisions and boost profitability.`,
-        windowSize: 'min'
+        id: 'make-image-black-and-white',
+        name: 'Make Image Black and White',
+        icon: '/icons/make-image-black-and-white.webp',
+        description: `Convert any image to black and white instantly with this simple tool. Upload your photo to get a clean grayscale version for a classic look or printing.`,
+        windowSize: 'max'
     },
+
     {
         id: 'merge-pdf',
         name: 'Merge PDF',
@@ -40,6 +42,13 @@ const list: ApplicationType[] = [
         description: `An easy-to-use PDF Merge app that quickly combines multiple PDFs into one, with fast processing, secure handling, and a clean interface.`,
         windowSize: 'max',
         windowRatio: '1.5'
+    },
+    {
+        id: 'margin-calculator',
+        name: 'Margin Calculator',
+        icon: '/icons/margin-calculator.webp',
+        description: `Free Margin Calculator to quickly find profit margin, markup, cost, and price. Helps business owners, entrepreneurs, and online sellers make smarter pricing decisions and boost profitability.`,
+        windowSize: 'min'
     }
 ];
 

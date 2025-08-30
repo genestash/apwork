@@ -8,7 +8,7 @@ import { Button } from '@/components/ui';
 import { useBlobUrl } from '@/hooks/useBlobUrl';
 import { uploadFile, downloadFile } from '@/libs/files';
 import { simulateProcessing } from '@/utils';
-import { convertImage } from './convertImage';
+import { convertImage } from '@/libs/convertImage';
 import style from './style.module.css';
 
 // Types
