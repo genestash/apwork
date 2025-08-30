@@ -1,5 +1,5 @@
 .item {
-    width: var(--item-width);
+    width: 100%;
     aspect-ratio: 1;
 
     box-shadow: var(--application-shadow);

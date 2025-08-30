@@ -5,52 +5,40 @@ import { ApplicationItem } from '@/components/application';
 import { ApplicationType } from '@/types/Application';
 import style from './style.module.css';
 
-type Props = {
-    items?: ApplicationType[];
-    min?: number;
-};
-
-export function useGridSize(itemsCount: number, itemWidth: number, gridGap: number) {
-    const [cols, setCols] = useState(1);
-    const [rows, setRows] = useState(1);
+export function useColumns(minItemWidth: number, gridGap: number) {
+    const [columns, setColumns] = useState(0);
     const ref = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         function handleResize() {
             if (!ref.current) return;
-            const listWidth = ref.current.offsetWidth;
-            const calcCols = Math.max(1, Math.floor((listWidth + gridGap) / (itemWidth + gridGap)));
-            const calcRows = Math.ceil(itemsCount / calcCols);
-            setCols(calcCols);
-            setRows(calcRows);
+            const containerWidth = ref.current.offsetWidth;
+            const count = Math.max(1, Math.floor((containerWidth + gridGap) / (minItemWidth + gridGap)));
+            setColumns(count);
         }
 
         handleResize();
 
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
-    }, [itemsCount, itemWidth, gridGap]);
+    }, [minItemWidth, gridGap]);
 
-    return { ref, cols, rows };
+    return { ref, columns };
 }
 
-export function ApplicationList({ items = [], min = 0 }: Props) {
-    const { ref, cols, rows } = useGridSize(Math.max(items.length, min), 148, 20);
-    const ghostItems = new Array((cols + 2) * rows).fill(null);
-    const invisibleItems = new Array(min - items.length).fill(null);
+export function ApplicationList({ items = [] }: { items: ApplicationType[] }) {
+    const { ref, columns } = useColumns(148, 20);
+    const remainder = columns ? items.length % columns : 0;
+    const ghostCount = remainder === 0 ? 0 : columns - remainder;
+    const ghostItems = new Array(ghostCount).fill(null);
 
     return (
-        <section className={style.list} ref={ref}>
-            <div className={style.ghostList}>
-                {ghostItems.map((_, index) => (
-                    <ApplicationItem key={index} />
-                ))}
-            </div>
+        <section ref={ref} className={style.list}>
             {items.map((item) => (
                 <ApplicationItem key={item.id} data={item} />
             ))}
-            {invisibleItems.map((_, index) => (
-                <div key={index} className={style.invisibleItem}></div>
+            {ghostItems.map((_, index) => (
+                <ApplicationItem key={index} />
             ))}
         </section>
     );
