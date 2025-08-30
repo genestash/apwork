@@ -30,7 +30,7 @@ jobs:
           username: ec2-user
           script: |
             cd /home/ec2-user/apwork
-            docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" -p "${{ secrets.DOCKERHUB_TOKEN }}"
+            echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/apwork-nextjs:latest
             docker tag ${{ secrets.DOCKERHUB_USERNAME }}/apwork-nextjs:latest apwork-nextjs:latest
             docker compose down
