@@ -11,7 +11,7 @@ function count(text: string) {
 
 export default function Application() {
     const [value, setValue] = useState('');
-    const [data, setData] = useState(count(value));
+    const [data, setData] = useState(() => count(value));
     const textareaRef = useRef<HTMLTextAreaElement>(null);
     const textareaId = useId();
 

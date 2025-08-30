@@ -9,6 +9,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v4
+        with:
+          context: ./nextjs
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/apwork-nextjs:latest
+
       - name: Deploy to EC2
         uses: appleboy/ssh-action@v0.1.7
         with:
@@ -16,12 +29,10 @@ jobs:
           host: ${{ secrets.EC2_IP }}
           username: ec2-user
           script: |
-            if [ ! -d "/home/ec2-user/apwork/.git" ]; then
-              git clone https://github.com/genestash/apwork.git /home/ec2-user/apwork
-            else
-              cd /home/ec2-user/apwork && git pull origin main
-            fi
             cd /home/ec2-user/apwork
+            docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" -p "${{ secrets.DOCKERHUB_TOKEN }}"
+            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/apwork-nextjs:latest
+            docker tag ${{ secrets.DOCKERHUB_USERNAME }}/apwork-nextjs:latest apwork-nextjs:latest
             docker compose down
-            docker compose up --build -d
+            docker compose up -d
             docker system prune -f
