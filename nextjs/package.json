@@ -1,6 +1,4 @@
 {
-    "name": "web",
-    "version": "1.0.0",
     "scripts": {
         "format": "prettier . --write",
         "dev": "next dev",

@@ -29,7 +29,19 @@ jobs:
           host: ${{ secrets.EC2_IP }}
           username: ec2-user
           script: |
+            mkdir -p /home/ec2-user/apwork
             cd /home/ec2-user/apwork
+
+            if [ ! -d ".git" ]; then
+              git init
+              git remote add origin https://github.com/genestash/apwork.git
+            fi
+
+            git config core.sparseCheckout true
+            echo "docker-compose.yml" > .git/info/sparse-checkout
+            echo "nginx/" >> .git/info/sparse-checkout
+            git pull origin main
+
             echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/apwork-nextjs:latest
             docker tag ${{ secrets.DOCKERHUB_USERNAME }}/apwork-nextjs:latest apwork-nextjs:latest
