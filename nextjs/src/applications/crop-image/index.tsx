@@ -67,12 +67,12 @@ const exampleMask = {
 // Components
 
 export default function Application() {
-    // State
+    // States
 
     const [processing, setProcessing] = useState<Processing>(Processing.Free);
     const [before, setBefore] = useState(exampleImage.src);
     const [shape, setShape] = useState(CropType.Free);
-    const [ratio, setRatio] = useState<RatioData>({ a: 4, b: 3, aRaw: 4, bRaw: 3 });
+    const [ratio, setRatio] = useState<RatioData>({ a: 3, b: 2, aRaw: 3, bRaw: 2 });
     const [mask, setMask] = useState<MaskData>({ x: -1, y: -1, w: -1, h: -1 });
     const [dragging, setDragging] = useState(false);
     const [resizing, setResizing] = useState(false);
