@@ -9,18 +9,23 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v2
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
+          aws-region: us-east-2
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
           context: ./nextjs
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/apwork-nextjs:latest
+          tags: 440744247704.dkr.ecr.us-east-2.amazonaws.com/apwork:latest
 
       - name: Deploy to EC2
         uses: appleboy/ssh-action@v0.1.7
@@ -42,9 +47,10 @@ jobs:
             echo "nginx/" >> .git/info/sparse-checkout
             git pull origin main
 
-            echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
-            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/apwork-nextjs:latest
-            docker tag ${{ secrets.DOCKERHUB_USERNAME }}/apwork-nextjs:latest apwork-nextjs:latest
+            aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 440744247704.dkr.ecr.us-east-2.amazonaws.com
+            docker pull 440744247704.dkr.ecr.us-east-2.amazonaws.com/apwork:latest
+            docker tag 440744247704.dkr.ecr.us-east-2.amazonaws.com/apwork:latest apwork-nextjs:latest
+
             docker compose down
             docker compose up -d
             docker system prune -f
