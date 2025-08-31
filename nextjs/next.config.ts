@@ -3,6 +3,8 @@ import { NextConfig } from 'next';
 const nextConfig: NextConfig = {
     devIndicators: false,
 
+    htmlLimitedBots: /.*/,
+
     experimental: {
         inlineCss: true
     },
