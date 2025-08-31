@@ -25,13 +25,13 @@ jobs:
         with:
           context: ./nextjs
           push: true
-          tags: ${{ ECR_REGISTRY }}/apwork-nextjs:latest
+          tags: ${{ secrets.ECR_REGISTRY }}/apwork-nextjs:latest
 
       - name: Deploy to EC2
         uses: appleboy/ssh-action@v0.1.7
         with:
           key: ${{ secrets.EC2_SSH_KEY }}
-          host: ${{ secrets.EC2_HOST_IP }}
+          host: ${{ secrets.EC2_HOST }}
           username: ec2-user
           script: |
             mkdir -p /home/ec2-user/apwork
@@ -47,9 +47,9 @@ jobs:
             echo "nginx/" >> .git/info/sparse-checkout
             git pull origin main
 
-            aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin ${{ ECR_REGISTRY }}
-            docker pull ${{ ECR_REGISTRY }}/apwork-nextjs:latest
-            docker tag ${{ ECR_REGISTRY }}/apwork-nextjs:latest apwork-nextjs:latest
+            aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin ${{ secrets.ECR_REGISTRY }}
+            docker pull ${{ secrets.ECR_REGISTRY }}/apwork-nextjs:latest
+            docker tag ${{ secrets.ECR_REGISTRY }}/apwork-nextjs:latest apwork-nextjs:latest
 
             docker compose down
             docker compose up -d
