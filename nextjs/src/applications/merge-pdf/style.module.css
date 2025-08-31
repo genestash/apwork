@@ -111,7 +111,7 @@
 }
 
 .buttons .rotate:hover .image {
-    background-color: var(--blue);
+    background-color: var(--blue-color);
 }
 
 .buttons .delete:hover .image {

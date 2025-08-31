@@ -81,5 +81,5 @@
 }
 
 .dropdown li.selected {
-    color: var(--blue);
+    color: var(--blue-color);
 }

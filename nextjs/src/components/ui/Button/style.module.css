@@ -60,17 +60,17 @@
 
 .blue {
     color: #fff;
-    background-color: var(--blue);
+    background-color: var(--blue-color);
     border: 1px solid #000;
-    border-color: color-mix(in srgb, var(--blue) 65%, #000);
+    border-color: color-mix(in srgb, var(--blue-color) 65%, #000);
 }
 
 .blue:hover {
-    background-color: color-mix(in srgb, var(--blue) 88%, #000);
+    background-color: color-mix(in srgb, var(--blue-color) 88%, #000);
 }
 
 .blue:active {
-    background-color: color-mix(in srgb, var(--blue) 74%, #000);
+    background-color: color-mix(in srgb, var(--blue-color) 74%, #000);
 }
 
 /* White */

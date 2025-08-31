@@ -4,7 +4,7 @@
     --min-width: 400px;
     --item-width: 148px;
 
-    --blue: #4169e1;
+    --blue-color: #4169e1;
     --red: #eb001b;
     --yellow-color: #ffcc00;
     --sand-color: #f8f7f6;
@@ -57,7 +57,7 @@ button {
 
 ::selection {
     color: #fff;
-    background: var(--blue);
+    background: var(--blue-color);
 }
 
 /* Body */

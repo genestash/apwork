@@ -142,5 +142,5 @@ body[data-loading='true'] .logo {
 }
 
 .bottom a:hover {
-    color: var(--blue);
+    color: var(--blue-color);
 }

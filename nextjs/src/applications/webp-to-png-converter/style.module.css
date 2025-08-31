@@ -9,7 +9,7 @@
 
 .window.active {
     border-radius: 16px;
-    outline: 2px dashed var(--blue);
+    outline: 2px dashed var(--blue-color);
     pointer-events: all;
 }
 
