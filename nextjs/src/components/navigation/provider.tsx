@@ -3,15 +3,12 @@
 import { createContext, useContext, useState, useRef, useCallback, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
+// Context
+
 type Context = {
     reloadPage: () => void;
     loadPage: (href: string) => void;
     setLoading: (state: boolean) => void;
-};
-
-type Props = {
-    minDelay?: number;
-    children: React.ReactNode;
 };
 
 const LoadingContext = createContext<Context | null>(null);
@@ -26,29 +23,35 @@ export function useLoading() {
     return context;
 }
 
+// Provider
+
+type Props = {
+    minDelay?: number;
+    children: React.ReactNode;
+};
+
 export function LoadingProvider({ minDelay = 0, children }: Props) {
     const [reloadKey, setReloadKey] = useState(0);
     const loadingStart = useRef(0);
     const router = useRouter();
 
+    // Methods
+
     const setLoading = useCallback(
         (state: boolean) => {
             if (state) {
                 loadingStart.current = Date.now();
-                document.body.setAttribute('data-loading', 'true');
+                document.body.dataset.loading = 'true';
                 return;
             }
 
             if (!loadingStart.current) {
-                document.body.setAttribute('data-loading', 'false');
+                document.body.dataset.loading = 'false';
                 return;
             }
 
-            const delay = Math.max(0, minDelay - (Date.now() - loadingStart.current));
-
-            setTimeout(() => {
-                document.body.setAttribute('data-loading', 'false');
-            }, delay);
+            const delay = minDelay - (Date.now() - loadingStart.current);
+            setTimeout(() => (document.body.dataset.loading = 'false'), delay);
         },
         [minDelay]
     );
@@ -67,6 +70,8 @@ export function LoadingProvider({ minDelay = 0, children }: Props) {
         [setLoading, router]
     );
 
+    // Effects
+
     useEffect(() => {
         const handlePopstate = () => {
             setLoading(true);
@@ -76,6 +81,8 @@ export function LoadingProvider({ minDelay = 0, children }: Props) {
         window.addEventListener('popstate', handlePopstate);
         return () => window.removeEventListener('popstate', handlePopstate);
     }, [setLoading]);
+
+    // Layout
 
     return (
         <LoadingContext.Provider value={{ reloadPage, loadPage, setLoading }} key={reloadKey}>

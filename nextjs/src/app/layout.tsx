@@ -5,7 +5,11 @@ import { Loader } from '@/components/ui';
 import style from './layout.module.css';
 import './global.css';
 
+// SSR on every request
+
 export const dynamic = 'force-dynamic';
+
+// Metadata
 
 export const metadata: Metadata = {
     icons: {
@@ -19,6 +23,8 @@ export const metadata: Metadata = {
         apple: '/icons/icon-512.png'
     }
 };
+
+// Layout
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
