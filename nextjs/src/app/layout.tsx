@@ -12,6 +12,12 @@ export const dynamic = 'force-dynamic';
 // Metadata
 
 export const metadata: Metadata = {
+    metadataBase: new URL('https://apwork.co'),
+
+    alternates: {
+        canonical: '/'
+    },
+
     icons: {
         icon: [
             { url: '/icons/favicon-48.ico', sizes: '16x16 32x32 48x48', type: 'image/x-icon' },

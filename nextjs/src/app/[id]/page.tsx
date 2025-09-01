@@ -20,7 +20,7 @@ export async function generateMetadata(context: Context) {
         title: data.name,
         description: data.description,
         alternates: {
-            canonical: `https://apwork.co/${data.id}`
+            canonical: `/${data.id}`
         }
     };
 }
